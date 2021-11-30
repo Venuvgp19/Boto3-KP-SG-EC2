@@ -1,4 +1,6 @@
 import os
+import json
+import time
 import boto3
 import botocore
 
@@ -9,6 +11,7 @@ class EC2:
    
     def create_keypair(self,name):
         try :
+            print('Creating Keypair.......')
             kp = self.ec2.create_key_pair(KeyName = '%s'%name)
             with open('%s'%name + '.pem','w') as file:
                 file.write(kp['KeyMaterial'])
@@ -23,6 +26,7 @@ class EC2:
     
     def CreateSecGrp(self,SgName):
         try:
+            print('Creating Security Group.....')
             Sg = self.ec2.create_security_group(
     		Description='ec2 security group',
     		GroupName='%s'%SgName,
@@ -91,13 +95,14 @@ class EC2:
         DryRun=False,
         InstanceInitiatedShutdownBehavior='terminate',
         )
-        return(instance)
+        time.sleep(10)
+        return(instance[0])
 
     def GetDnsName(self,instid):
         resp = self.ec2.describe_instances(
            InstanceIds = ['%s'%instid]
         )
-        return resp.dns-name
+        return resp
         
 if __name__ == '__main__':
     ec2_client = boto3.client('ec2')
@@ -119,4 +124,4 @@ if __name__ == '__main__':
         print(f'Ingress for SG {sg_name} already defined')
     
     instid = res.Create_EC2(kpname,Sgid)
-    print(clt.GetDnsName(instid))
+    print(f'EC2 instace with ID {instid.id} has been created on AWS and downloaded keypair in the current working directory')
