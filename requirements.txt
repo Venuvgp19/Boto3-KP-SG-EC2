@@ -1,0 +1,3 @@
+os
+boto3
+botocore
