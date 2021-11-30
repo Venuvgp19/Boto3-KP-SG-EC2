@@ -92,6 +92,12 @@ class EC2:
         InstanceInitiatedShutdownBehavior='terminate',
         )
         return(instance)
+
+    def GetDnsName(self,instid):
+        resp = self.ec2.describe_instances(
+           InstanceIds = ['%s'%instid]
+        )
+        return resp.dns-name
         
 if __name__ == '__main__':
     ec2_client = boto3.client('ec2')
@@ -112,4 +118,5 @@ if __name__ == '__main__':
     except botocore.exceptions.ClientError:
         print(f'Ingress for SG {sg_name} already defined')
     
-    print(res.Create_EC2(kpname,Sgid))
+    instid = res.Create_EC2(kpname,Sgid)
+    print(clt.GetDnsName(instid))
