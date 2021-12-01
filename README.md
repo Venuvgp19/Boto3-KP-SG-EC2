@@ -14,12 +14,13 @@ What it does?
     git clone https://github.com/Venuvgp19/Boto3-KP-SG-EC2.git
     
 ## navigate to the Directory and execute the script.
-    (venu) (base) [root@wppljmp001 Boto3-KP-SG-EC2]# python Create_EC2.py
+    (venu) (base) [root@server Boto3-KP-SG-EC2]# python Create_EC2.py
     Enter Key pair name : KP1
     Creating Keypair.......
     Enter the sg name : ec2-ssh
     Creating Security Group.....
     Egress for SG ec2-ssh already defined
+    Ingress for SG ec2-ssh defined
     EC2 instace with ID i-00fa463f2039b4800 has been created on AWS and downloaded keypair in the current working directory
     
     
