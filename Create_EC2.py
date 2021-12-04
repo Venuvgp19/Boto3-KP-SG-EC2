@@ -74,6 +74,12 @@ class EC2:
             'IpProtocol': 'tcp',
             'ToPort' : 22,
             'IpRanges' : [{'CidrIp' : '0.0.0.0/0'}]
+        },
+        {
+            'FromPort': 8080,
+            'IpProtocol': 'tcp',
+            'ToPort' : 8080,
+            'IpRanges' : [{'CidrIp' : '0.0.0.0/0'}]
         }
         ]
         )
@@ -81,7 +87,7 @@ class EC2:
 
     def Create_EC2(self,kpname,sgid):
         instance = self.ec2.create_instances(
-        ImageId='ami-0108d6a82a783b352',
+        ImageId='ami-082432365ef92b300',
         InstanceType='t2.micro',
         KeyName='%s'%kpname,
         MaxCount=1,
